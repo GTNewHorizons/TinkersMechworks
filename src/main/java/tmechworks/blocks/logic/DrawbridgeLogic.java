@@ -425,7 +425,7 @@ public class DrawbridgeLogic extends InventoryLogic implements IFacingLogic, IAc
                         if (block != null)
                         {
                             int meta = worldObj.getBlockMetadata(xPos, yPos, zPos);
-                            if (bufferStack != null && validBlock(block) && validMetadata(block, meta) && validDrawbridge(xPos, yPos, zPos))
+                            if (bufferStack != null && validBlock(block) && validMetadata(block, meta) && validDrawbridge(xPos, yPos, zPos) && !isContainer(xPos, yPos, zPos))
                             {
                                 worldObj.playSoundEffect((double) xPos + 0.5D, (double) yPos + 0.5D, (double) zPos + 0.5D, "tile.piston.in", 0.25F, worldObj.rand.nextFloat() * 0.15F + 0.6F);
                                 if (worldObj.setBlock(xPos, yPos, zPos, Blocks.air))
@@ -542,6 +542,15 @@ public class DrawbridgeLogic extends InventoryLogic implements IFacingLogic, IAc
             return metadata == bufferStack.getItemDamage();
         }*/
         return true;
+    }
+
+    boolean isContainer (int x, int y, int z)
+    {
+        TileEntity te = worldObj.getTileEntity(x, y, z);
+        if (tile != null && tile instanceof IInventory)
+            return true;
+
+        return false;
     }
 
     @Override
