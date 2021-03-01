@@ -15,6 +15,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -425,7 +427,7 @@ public class DrawbridgeLogic extends InventoryLogic implements IFacingLogic, IAc
                         if (block != null)
                         {
                             int meta = worldObj.getBlockMetadata(xPos, yPos, zPos);
-                            if (bufferStack != null && validBlock(block) && validMetadata(block, meta) && validDrawbridge(xPos, yPos, zPos) && !isContainer(xPos, yPos, zPos))
+                            if (bufferStack != null && validBlock(block) && validMetadata(block, meta) && validDrawbridge(xPos, yPos, zPos) && !hasInventory(xPos, yPos, zPos))
                             {
                                 worldObj.playSoundEffect((double) xPos + 0.5D, (double) yPos + 0.5D, (double) zPos + 0.5D, "tile.piston.in", 0.25F, worldObj.rand.nextFloat() * 0.15F + 0.6F);
                                 if (worldObj.setBlock(xPos, yPos, zPos, Blocks.air))
@@ -544,10 +546,10 @@ public class DrawbridgeLogic extends InventoryLogic implements IFacingLogic, IAc
         return true;
     }
 
-    boolean isContainer (int x, int y, int z)
+    boolean hasInventory (int x, int y, int z)
     {
         TileEntity te = worldObj.getTileEntity(x, y, z);
-        if (tile != null && tile instanceof IInventory)
+        if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
             return true;
 
         return false;
