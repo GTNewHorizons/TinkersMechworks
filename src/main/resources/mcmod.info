@@ -1,10 +1,10 @@
 [
   {
-    "modid": "TMechworks",
-    "name": "Tinkers' Mechworks",
+    "modid": "${modId}",
+    "name": "${modName}",
     "description": "",
-    "version": "${version}",
-    "mcversion": "${MCversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "",
     "updateUrl": "",
     "authors": [
