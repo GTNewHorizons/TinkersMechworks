@@ -1,5 +1,5 @@
 // Add your dependencies here
 
 dependencies {
-    compile("com.github.GTNewHorizons:TinkersConstruct:master-SNAPSHOT:dev")
+    compile("com.github.GTNewHorizons:TinkersConstruct:1.9.0.9-GTNH:dev")
 }
