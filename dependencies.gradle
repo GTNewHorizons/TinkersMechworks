@@ -1,5 +1,7 @@
 // Add your dependencies here
 
 dependencies {
-    compile("com.github.GTNewHorizons:TinkersConstruct:1.9.0.9-GTNH:dev")
+    compile("com.github.GTNewHorizons:TinkersConstruct:1.9.0.10-GTNH:dev")
+    compile("com.github.GTNewHorizons:Mantle:0.3.4:dev")
+
 }
