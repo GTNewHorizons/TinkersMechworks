@@ -1,0 +1,4 @@
+Licenses Most code is licensed under the MIT License. (http://opensource.org/licenses/MIT)
+
+Textures and binaries are licensed under Creative Commons 3. (http://creativecommons.org/licenses/by/3.0/)
+
