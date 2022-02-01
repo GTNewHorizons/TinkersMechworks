@@ -1,5 +1,6 @@
 package tmechworks.common;
 
+import cpw.mods.fml.common.Loader;
 import mantle.lib.client.MantleClientRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -42,7 +43,9 @@ public class MechContent
     {
         registerItems();
         registerBlocks();
-        MechRecipes.registerAllTheThings();// !
+        if (!Loader.isModLoaded("dreamcraft")) {
+            MechRecipes.registerAllTheThings();// !
+        }
         setupToolTabs();
 
     }
