@@ -28,8 +28,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Repo.modId, name = Repo.modName, version = Repo.modVer, dependencies = Repo.modDeps)
-public class TMechworks
-{
+public class TMechworks {
 
     /* Shared mod logger */
     public static Logger logger;
@@ -47,8 +46,7 @@ public class TMechworks
     public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     @EventHandler
-    public void preInit (FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
 
         ConfigCore.loadConfig(new Configuration(event.getSuggestedConfigurationFile()));
@@ -63,26 +61,22 @@ public class TMechworks
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
         MinecraftForge.EVENT_BUS.register(new MultiblockEventHandler());
-        if (event.getSide() == Side.SERVER)
-        {
+        if (event.getSide() == Side.SERVER) {
             MinecraftForge.EVENT_BUS.register(new MultiblockServerTickHandler());
         }
     }
 
     @EventHandler
-    public void init (FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         packetPipeline.initalise();
-        if (event.getSide() == Side.CLIENT)
-        {
+        if (event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new SignalTetherWorldOverlayRenderer());
         }
         proxy.init();
     }
 
     @EventHandler
-    public void postInit (FMLPostInitializationEvent evt)
-    {
+    public void postInit(FMLPostInitializationEvent evt) {
         packetPipeline.postInitialise();
         content.postInit();
         proxy.postInit();
@@ -90,8 +84,7 @@ public class TMechworks
     }
 
     @EventHandler
-    public void serverStarting (FMLServerStartingEvent evt)
-    {
+    public void serverStarting(FMLServerStartingEvent evt) {
         evt.registerServerCommand(new BlockInfoCommand());
     }
 

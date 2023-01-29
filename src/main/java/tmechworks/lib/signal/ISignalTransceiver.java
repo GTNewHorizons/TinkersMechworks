@@ -1,21 +1,21 @@
 package tmechworks.lib.signal;
 
 import mantle.world.CoordTuple;
+
 import net.minecraft.world.World;
 
-public interface ISignalTransceiver
-{
+public interface ISignalTransceiver {
 
-    void setBusCoords (World world, int xCoord, int yCoord, int zCoord);
+    void setBusCoords(World world, int xCoord, int yCoord, int zCoord);
 
-    CoordTuple getBusCoords ();
+    CoordTuple getBusCoords();
 
-    byte[] getReceivedSignals ();
+    byte[] getReceivedSignals();
 
-    void receiveSignalUpdate (byte[] signals);
+    void receiveSignalUpdate(byte[] signals);
 
-    int doUnregister (boolean reHoming);
+    int doUnregister(boolean reHoming);
 
-    int getDroppedWire ();
+    int getDroppedWire();
 
 }

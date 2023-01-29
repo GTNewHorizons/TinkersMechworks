@@ -10,22 +10,18 @@ import net.minecraft.item.ItemStack;
  * @author fuj1n
  *
  */
-public class SlotBlocksOnly extends Slot
-{
+public class SlotBlocksOnly extends Slot {
 
-    public SlotBlocksOnly(IInventory par1iInventory, int par2, int par3, int par4)
-    {
+    public SlotBlocksOnly(IInventory par1iInventory, int par2, int par3, int par4) {
         super(par1iInventory, par2, par3, par4);
     }
 
-    public boolean isItemValid (ItemStack par1ItemStack)
-    {
+    public boolean isItemValid(ItemStack par1ItemStack) {
         return par1ItemStack.getItem() instanceof ItemBlock;
     }
 
     @Override
-    public int getSlotStackLimit ()
-    {
+    public int getSlotStackLimit() {
         return 1;
     }
 

@@ -1,6 +1,7 @@
 package tmechworks.common;
 
 import mantle.lib.client.MantleClientRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -9,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import tconstruct.library.TConstructRegistry;
 import tmechworks.blocks.DynamoBlock;
 import tmechworks.blocks.FilterBlock;
@@ -18,7 +20,6 @@ import tmechworks.blocks.SignalTerminal;
 import tmechworks.blocks.logic.AdvancedDrawbridgeLogic;
 import tmechworks.blocks.logic.DrawbridgeLogic;
 import tmechworks.blocks.logic.DynamoLogic;
-import tmechworks.blocks.logic.FilterLogic;
 import tmechworks.blocks.logic.FineFilter;
 import tmechworks.blocks.logic.FirestarterLogic;
 import tmechworks.blocks.logic.MeshFilter;
@@ -35,11 +36,9 @@ import tmechworks.items.blocks.SignalTerminalItem;
 import tmechworks.lib.TMechworksRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class MechContent
-{
+public class MechContent {
 
-    public MechContent()
-    {
+    public MechContent() {
         registerItems();
         registerBlocks();
         MechRecipes.registerAllTheThings();// !
@@ -47,13 +46,11 @@ public class MechContent
 
     }
 
-    public void postInit ()
-    {
+    public void postInit() {
         setupTConManual();
     }
 
-    private void registerItems ()
-    {
+    private void registerItems() {
         // TODO: Register these with Forge
         lengthWire = new LengthWire().setUnlocalizedName("lengthwire");
         GameRegistry.registerItem(lengthWire, "LengthWire");
@@ -68,20 +65,20 @@ public class MechContent
         proxyItem_largePlate = TConstructRegistry.getItem("heavyPlate");
     }
 
-    private void registerBlocks ()
-    {
-        //Redstone machines
+    private void registerBlocks() {
+        // Redstone machines
         redstoneMachine = new RedstoneMachine().setBlockName("tmechworks.redstoneMachine");
         GameRegistry.registerBlock(redstoneMachine, RedstoneMachineItem.class, "RedstoneMachine");
         GameRegistry.registerTileEntity(DrawbridgeLogic.class, "Drawbridge");
         GameRegistry.registerTileEntity(FirestarterLogic.class, "Firestarter");
         GameRegistry.registerTileEntity(AdvancedDrawbridgeLogic.class, "AdvDrawbridge");
 
-        dynamo = new DynamoBlock().setLightLevel(1.0F).setBlockName("tmechworks.dynamo").setBlockTextureName("tinker:compressed_alubrass");
+        dynamo = new DynamoBlock().setLightLevel(1.0F).setBlockName("tmechworks.dynamo")
+                .setBlockTextureName("tinker:compressed_alubrass");
         GameRegistry.registerBlock(dynamo, "Dynamo");
         GameRegistry.registerTileEntity(DynamoLogic.class, "TMechworks:Dynamo");
 
-        //Signal blocks
+        // Signal blocks
         signalBus = new SignalBus().setBlockName("tmechworks.signalbus");
         GameRegistry.registerBlock(signalBus, SignalBusItem.class, "SignalBus");
         GameRegistry.registerTileEntity(SignalBusLogic.class, "SignalBus");
@@ -89,36 +86,33 @@ public class MechContent
         GameRegistry.registerBlock(signalTerminal, SignalTerminalItem.class, "SignalTerminal");
         GameRegistry.registerTileEntity(SignalTerminalLogic.class, "SignalTerminal");
 
-        //Inventory management
-        filter = (FilterBlock) new FilterBlock().setBlockName("tmechworks.meshFilter").setBlockTextureName("tmechworks:machines/drawbridge_bottom");
-        //A technical filter.
-        SubFilter nilFilter = new SubFilter()
-        {
+        // Inventory management
+        filter = (FilterBlock) new FilterBlock().setBlockName("tmechworks.meshFilter")
+                .setBlockTextureName("tmechworks:machines/drawbridge_bottom");
+        // A technical filter.
+        SubFilter nilFilter = new SubFilter() {
+
             @Override
-            public boolean canPass (Entity entity)
-            {
+            public boolean canPass(Entity entity) {
                 return ((entity instanceof EntityItem) || (entity instanceof EntityXPOrb));
             }
 
             @Override
-            public boolean canPass (ItemStack itemStack)
-            {
+            public boolean canPass(ItemStack itemStack) {
                 return true;
             }
         };
         nilFilter.setSuffix("empty");
         filter.subFilters[0] = nilFilter;
-        //Lets through any item or XP orb, but not other entities.
-        SubFilter wideFilter = new SubFilter()
-        {
-            public boolean canPass (Entity entity)
-            {
+        // Lets through any item or XP orb, but not other entities.
+        SubFilter wideFilter = new SubFilter() {
+
+            public boolean canPass(Entity entity) {
                 return ((entity instanceof EntityItem) || (entity instanceof EntityXPOrb));
             }
 
             @Override
-            public boolean canPass (ItemStack itemStack)
-            {
+            public boolean canPass(ItemStack itemStack) {
                 return true;
             }
         };
@@ -150,24 +144,42 @@ public class MechContent
         filter.setSubFilter(fineFilter, 4);
 
         GameRegistry.registerBlock(filter, ItemBlockWithMetadata.class, "MeshFilter");
-        //GameRegistry.registerTileEntity(FilterLogic.class, "MeshFilter"); //No longer necessary.
+        // GameRegistry.registerTileEntity(FilterLogic.class, "MeshFilter"); //No longer necessary.
     }
 
-    private void setupToolTabs ()
-    {
+    private void setupToolTabs() {
         TMechworksRegistry.Mechworks.init(new ItemStack(signalTerminal, 1));
 
     }
 
-    private void setupTConManual ()
-    {
+    private void setupTConManual() {
         ItemStack redstone = new ItemStack(Items.redstone);
         ItemStack blankCast = new ItemStack(proxyItem_blankPattern, 1, 1);
 
-        MantleClientRegistry.registerManualLargeRecipe("drawbridge", new ItemStack(redstoneMachine, 1, 0), proxyIS_alubrassIngot, blankCast, proxyIS_alubrassIngot, proxyIS_bronzeIngot, new ItemStack(
-                Blocks.dispenser), proxyIS_bronzeIngot, proxyIS_bronzeIngot, redstone, proxyIS_bronzeIngot);
-        MantleClientRegistry.registerManualLargeRecipe("igniter", new ItemStack(redstoneMachine, 1, 1), proxyIS_alubrassIngot, new ItemStack(proxyItem_largePlate, 1, 7), proxyIS_alubrassIngot,
-                proxyIS_bronzeIngot, new ItemStack(Items.flint_and_steel), proxyIS_bronzeIngot, proxyIS_bronzeIngot, redstone, proxyIS_bronzeIngot);
+        MantleClientRegistry.registerManualLargeRecipe(
+                "drawbridge",
+                new ItemStack(redstoneMachine, 1, 0),
+                proxyIS_alubrassIngot,
+                blankCast,
+                proxyIS_alubrassIngot,
+                proxyIS_bronzeIngot,
+                new ItemStack(Blocks.dispenser),
+                proxyIS_bronzeIngot,
+                proxyIS_bronzeIngot,
+                redstone,
+                proxyIS_bronzeIngot);
+        MantleClientRegistry.registerManualLargeRecipe(
+                "igniter",
+                new ItemStack(redstoneMachine, 1, 1),
+                proxyIS_alubrassIngot,
+                new ItemStack(proxyItem_largePlate, 1, 7),
+                proxyIS_alubrassIngot,
+                proxyIS_bronzeIngot,
+                new ItemStack(Items.flint_and_steel),
+                proxyIS_bronzeIngot,
+                proxyIS_bronzeIngot,
+                redstone,
+                proxyIS_bronzeIngot);
 
     }
 

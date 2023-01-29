@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+
 import tmechworks.blocks.logic.AdvancedDrawbridgeLogic;
 import tmechworks.blocks.logic.DrawbridgeLogic;
 import tmechworks.blocks.logic.DynamoLogic;
@@ -20,12 +21,10 @@ import tmechworks.common.MechContent;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
 
     @Override
-    public Object getClientGuiElement (int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == drawbridgeID)
             return new DrawbridgeGui(player.inventory, (DrawbridgeLogic) world.getTileEntity(x, y, z), world, x, y, z);
         if (ID == advDrawbridgeID)
@@ -33,14 +32,12 @@ public class ClientProxy extends CommonProxy
         return null;
     }
 
-    public void registerTickHandler ()
-    {
+    public void registerTickHandler() {
         super.registerTickHandler();
     }
 
     /* Registers any rendering code. */
-    public void registerRenderer ()
-    {
+    public void registerRenderer() {
         RenderingRegistry.registerBlockHandler(new MachineRender());
         RenderingRegistry.registerBlockHandler(new SignalBusRender());
         RenderingRegistry.registerBlockHandler(new SignalTerminalRender());

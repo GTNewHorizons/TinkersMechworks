@@ -12,21 +12,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import tmechworks.blocks.logic.SignalBusLogic;
 import tmechworks.blocks.logic.SignalTerminalLogic;
 import tmechworks.lib.TMechworksRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SpoolOfWire extends Item
-{
+public class SpoolOfWire extends Item {
+
     public String textureName = "spoolwire";
     public String unlocalizedName = "spoolwire";
     public String folder = "logic/";
     public IIcon icon;
 
-    public SpoolOfWire()
-    {
+    public SpoolOfWire() {
         super();
         this.setCreativeTab(TMechworksRegistry.Mechworks);
         this.maxStackSize = 1;
@@ -35,26 +35,22 @@ public class SpoolOfWire extends Item
     }
 
     @Override
-    public ItemStack getContainerItem (ItemStack itemStack)
-    {
+    public ItemStack getContainerItem(ItemStack itemStack) {
         return new ItemStack(this, 1, this.getMaxDamage());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation (ItemStack stack, EntityPlayer player, List list, boolean par4)
-    {
-        switch (stack.getItemDamage())
-        {
-        case 0:
-            list.add(StatCollector.translateToLocal("tooltip.spoolofwire"));
-            break;
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+        switch (stack.getItemDamage()) {
+            case 0:
+                list.add(StatCollector.translateToLocal("tooltip.spoolofwire"));
+                break;
         }
 
         NBTTagCompound nbtCompound = stack.getTagCompound();
 
-        if (nbtCompound != null && nbtCompound.hasKey("spoolWireData"))
-        {
+        if (nbtCompound != null && nbtCompound.hasKey("spoolWireData")) {
             NBTTagCompound spoolData = nbtCompound.getCompoundTag("spoolWireData");
 
             int targetDim = spoolData.getInteger("targetDim");
@@ -62,36 +58,37 @@ public class SpoolOfWire extends Item
             int targetY = spoolData.getInteger("targetY");
             int targetZ = spoolData.getInteger("targetZ");
 
-            list.add(StatCollector.translateToLocalFormatted("tooltip.spoolofwire.connecting", targetX, targetY, targetZ, targetDim));
+            list.add(
+                    StatCollector.translateToLocalFormatted(
+                            "tooltip.spoolofwire.connecting",
+                            targetX,
+                            targetY,
+                            targetZ,
+                            targetDim));
         }
     }
 
-    public String getUnlocalizedName (ItemStack stack)
-    {
+    public String getUnlocalizedName(ItemStack stack) {
         return "item." + unlocalizedName;
     }
 
     @Override
-    public boolean onItemUse (ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
-    {
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7,
+            float par8, float par9, float par10) {
         TileEntity te = world.getTileEntity(x, y, z);
         NBTTagCompound data = itemstack.stackTagCompound;
         NBTTagCompound spoolData = null;
 
-        if (world.isRemote)
-        {
+        if (world.isRemote) {
             return false;
         }
 
-        if (data == null)
-        {
+        if (data == null) {
             data = new NBTTagCompound();
             itemstack.stackTagCompound = data;
         }
-        if (te != null && te instanceof SignalBusLogic)
-        {
-            if (data.hasKey("spoolWireData"))
-            {
+        if (te != null && te instanceof SignalBusLogic) {
+            if (data.hasKey("spoolWireData")) {
                 spoolData = data.getCompoundTag("spoolWireData");
 
                 int targetDim = spoolData.getInteger("targetDim");
@@ -100,17 +97,14 @@ public class SpoolOfWire extends Item
                 int targetZ = spoolData.getInteger("targetZ");
 
                 int calc = Math.abs(targetX - x) + Math.abs(targetY - y) + Math.abs(targetZ - z);
-                if ((itemstack.getMaxDamage() - itemstack.getItemDamage()) < calc)
-                {
+                if ((itemstack.getMaxDamage() - itemstack.getItemDamage()) < calc) {
                     return false;
                 }
-                if (targetDim == world.provider.dimensionId && calc < 16)
-                {
+                if (targetDim == world.provider.dimensionId && calc < 16) {
                     boolean registered = ((SignalBusLogic) te).registerTerminal(world, targetX, targetY, targetZ, true);
                     data.removeTag("spoolWireData");
 
-                    if (registered)
-                    {
+                    if (registered) {
                         itemstack.damageItem(calc, player);
                     }
                     return true;
@@ -119,12 +113,10 @@ public class SpoolOfWire extends Item
 
             return false;
         }
-        if (te != null && te instanceof SignalTerminalLogic)
-        {
+        if (te != null && te instanceof SignalTerminalLogic) {
             data = itemstack.stackTagCompound;
             spoolData = null;
-            if (data.hasKey("spoolWireData"))
-            {
+            if (data.hasKey("spoolWireData")) {
                 data.removeTag("spoolWireData");
             }
             spoolData = new NBTTagCompound();
@@ -143,34 +135,29 @@ public class SpoolOfWire extends Item
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage (int meta)
-    {
+    public IIcon getIconFromDamage(int meta) {
         return icon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons (IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         this.icon = iconRegister.registerIcon("tmechworks:" + folder + textureName);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect (ItemStack itemStack, int pass)
-    {
+    public boolean hasEffect(ItemStack itemStack, int pass) {
         NBTTagCompound nbtCompound = itemStack.getTagCompound();
 
-        if (nbtCompound != null && nbtCompound.hasKey("spoolWireData"))
-        {
+        if (nbtCompound != null && nbtCompound.hasKey("spoolWireData")) {
             return true;
         }
 
         return false;
     }
 
-    public void getSubItems (Item b, CreativeTabs tab, List list)
-    {
+    public void getSubItems(Item b, CreativeTabs tab, List list) {
         list.add(new ItemStack(b, 1, 0));
     }
 }

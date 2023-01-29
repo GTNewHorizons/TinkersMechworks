@@ -3,9 +3,9 @@ package tmechworks.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class DynamoModel extends ModelBase
-{
-    //fields
+public class DynamoModel extends ModelBase {
+
+    // fields
     ModelRenderer Dynamo;
     ModelRenderer CaseTop;
     ModelRenderer CaseButtonTop;
@@ -14,8 +14,7 @@ public class DynamoModel extends ModelBase
     ModelRenderer CaseBottom;
     ModelRenderer CaseButtonBottom;
 
-    public DynamoModel()
-    {
+    public DynamoModel() {
         Dynamo = new ModelRenderer(this, 0, 0);
         Dynamo.addBox(-2F, 0F, -2F, 4, 8, 4);
         Dynamo.setRotationPoint(0F, 4F, 0F);
@@ -53,9 +52,8 @@ public class DynamoModel extends ModelBase
         setRotation(CaseButtonBottom, 0F, 0F, 0F);
     }
 
-    public void render (float start, float deltaTime)
-    {
-        /*super.render(entity, f, f1, f2, f3, f4, f5);*/
+    public void render(float start, float deltaTime) {
+        /* super.render(entity, f, f1, f2, f3, f4, f5); */
         setRotationAngles(start, deltaTime);
         Dynamo.render(start);
         CaseTop.render(start);
@@ -66,8 +64,7 @@ public class DynamoModel extends ModelBase
         CaseButtonBottom.render(start);
     }
 
-    private void setRotationAngles (float start, float deltaTime)
-    {
+    private void setRotationAngles(float start, float deltaTime) {
         Dynamo.rotateAngleY -= deltaTime / 16;
         CaseSide1.rotateAngleY += deltaTime / 8;
         CaseSide2.rotateAngleY += deltaTime / 8;
@@ -75,8 +72,7 @@ public class DynamoModel extends ModelBase
         CaseBottom.rotateAngleY += deltaTime / 16;
     }
 
-    private void setRotation (ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

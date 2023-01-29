@@ -20,11 +20,10 @@ import tmechworks.lib.blocks.PlacementType;
 import tmechworks.lib.util.TabTools;
 
 import com.google.common.collect.HashBiMap;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TMechworksRegistry
-{
+public class TMechworksRegistry {
+
     public static TMechworksRegistry instance = new TMechworksRegistry();
 
     public static Logger logger = LogManager.getLogger("TMech-API");
@@ -32,14 +31,10 @@ public class TMechworksRegistry
     /* Creative tabs */
     public static TabTools Mechworks;
 
-    /* Used to determine how blocks are laid out in the drawbridge
-     * 0: Metadata has to match
-     * 1: Metadata has no meaning
-     * 2: Should not be placed
-     * 3: Has rotational metadata
-     * 4: Rails
-     * 5: Has rotational TileEntity data
-     * 6: Custom placement logic
+    /*
+     * Used to determine how blocks are laid out in the drawbridge 0: Metadata has to match 1: Metadata has no meaning
+     * 2: Should not be placed 3: Has rotational metadata 4: Rails 5: Has rotational TileEntity data 6: Custom placement
+     * logic
      */
     public static HashMap<ItemStack, PlacementType> drawbridgeState = new HashMap<ItemStack, PlacementType>();
     /** Blocks that are interchangable with each other. Ex: Still and flowing water */
@@ -50,34 +45,30 @@ public class TMechworksRegistry
     private static List<ItemBlock> drawbridgeBlacklist;
 
     /*
-     * Used to determine how blocks are laid out in the drawbridge 0: Metadata
-     * has to match 1: Metadata has no meaning 2: Should not be placed 3: Has
-     * rotational metadata 4: Rails 5: Has rotational TileEntity data 6: Custom
-     * placement logic
+     * Used to determine how blocks are laid out in the drawbridge 0: Metadata has to match 1: Metadata has no meaning
+     * 2: Should not be placed 3: Has rotational metadata 4: Rails 5: Has rotational TileEntity data 6: Custom placement
+     * logic
      */
 
     // moved to TMech
     // public static HashMap<ItemStack, Integer> drawbridgeState = new
     // HashMap<ItemStack, Integer>();
     /*
-     * Blocks that are interchangable with each other. Ex: Still and flowing
-     * water
+     * Blocks that are interchangable with each other. Ex: Still and flowing water
      */
     // static HashMap<Block, Block> interchangableBlockMapping = new
     // HashMap<Block, Block> ();
     /* Blocks that place items, and vice versa */
     // public static HashBiMap<Block, Item> blockToItemMapping;
 
-    static void initializeDrawbridgeState ()
-    {
+    static void initializeDrawbridgeState() {
 
-        /*0: Metadata has to match            PlacementType.metaMatch
-        1: Metadata has no meaning          PlacementType.metaIgnore
-        2: Should not be placed             PlacementType.GTFO
-        3: Has rotational metadata          PlacementType.rotationalMeta
-        4: Rails                            PlacementType.rails
-        5: Has rotational TileEntity data   PlacementType.rotationalTE
-        6: Custom placement logic           PlacementType.custom*/
+        /*
+         * 0: Metadata has to match PlacementType.metaMatch 1: Metadata has no meaning PlacementType.metaIgnore 2:
+         * Should not be placed PlacementType.GTFO 3: Has rotational metadata PlacementType.rotationalMeta 4: Rails
+         * PlacementType.rails 5: Has rotational TileEntity data PlacementType.rotationalTE 6: Custom placement logic
+         * PlacementType.custom
+         */
 
         drawbridgeState.put(new ItemStack(Blocks.stone), PlacementType.metaIgnore);
         drawbridgeState.put(new ItemStack(Blocks.grass), PlacementType.metaIgnore);
@@ -169,7 +160,7 @@ public class TMechworksRegistry
         interchangableBlockMapping.put(Blocks.unpowered_repeater, Blocks.powered_repeater);
         interchangableBlockMapping.put(Blocks.powered_repeater, Blocks.unpowered_repeater);
         blockToItemMapping.put(Blocks.unpowered_repeater, Items.repeater);
-        //blockToItemMapping.put(Blocks.powered_repeater, Items.repeater);
+        // blockToItemMapping.put(Blocks.powered_repeater, Items.repeater);
         drawbridgeState.put(new ItemStack(Blocks.trapdoor), PlacementType.rotationalMeta);
         drawbridgeState.put(new ItemStack(Blocks.brown_mushroom), PlacementType.metaIgnore);
         drawbridgeState.put(new ItemStack(Blocks.red_mushroom), PlacementType.metaIgnore);
@@ -219,7 +210,7 @@ public class TMechworksRegistry
         interchangableBlockMapping.put(Blocks.unpowered_comparator, Blocks.powered_comparator);
         interchangableBlockMapping.put(Blocks.powered_comparator, Blocks.unpowered_comparator);
         blockToItemMapping.put(Blocks.unpowered_comparator, Items.comparator);
-        //blockToItemMapping.put(Blocks.powered_comparator, Items.comparator);
+        // blockToItemMapping.put(Blocks.powered_comparator, Items.comparator);
         drawbridgeState.put(new ItemStack(Blocks.daylight_detector), PlacementType.metaIgnore);
         drawbridgeState.put(new ItemStack(Blocks.redstone_block), PlacementType.metaIgnore);
         drawbridgeState.put(new ItemStack(Blocks.quartz_ore), PlacementType.metaIgnore);
@@ -231,29 +222,24 @@ public class TMechworksRegistry
         interchangableBlockMapping.put(Blocks.dirt, Blocks.grass);
         interchangableBlockMapping.put(Blocks.grass, Blocks.dirt);
 
-        //TCON STUFFS
+        // TCON STUFFS
         drawbridgeState.put(new ItemStack(TinkerWorld.slimePad), PlacementType.metaIgnore);
         drawbridgeState.put(new ItemStack(TinkerWorld.bloodChannel), PlacementType.metaIgnore);
 
     }
 
-    public static void initDrawbridgeBlackList (String[] blockNameList)
-    {
+    public static void initDrawbridgeBlackList(String[] blockNameList) {
         drawbridgeBlacklist = new ArrayList<ItemBlock>();
 
-        for (String blockNameCompond : blockNameList)
-        {
+        for (String blockNameCompond : blockNameList) {
             int index = blockNameCompond.indexOf(":");
 
             String modId;
             String blockName;
 
-            if (index > 0)
-            {
+            if (index > 0) {
                 modId = blockNameCompond.substring(0, index);
-            }
-            else
-            {
+            } else {
                 modId = "minecraft";
             }
 
@@ -263,13 +249,10 @@ public class TMechworksRegistry
 
             Item itemBlock = Item.getItemFromBlock(block);
 
-            if (itemBlock != null && itemBlock instanceof ItemBlock)
-            {
+            if (itemBlock != null && itemBlock instanceof ItemBlock) {
                 drawbridgeBlacklist.add((ItemBlock) itemBlock);
 
-            }
-            else
-            {
+            } else {
                 TMechworks.logger.warn("Invaild block: " + blockNameCompond + ", and it will be skiped");
             }
         }
@@ -277,48 +260,42 @@ public class TMechworksRegistry
 
     /**
      * Checks if the item is blacklisted for the drawbridge.
+     * 
      * @param item ItemBlock to be checked.
      * @return true if is black listed.
      */
-    public static boolean isItemDBBlacklisted (ItemBlock item)
-    {
-        for (ItemBlock itemCheckAgainst : drawbridgeBlacklist)
-        {
-            if (itemCheckAgainst == item)
-                return true;
+    public static boolean isItemDBBlacklisted(ItemBlock item) {
+        for (ItemBlock itemCheckAgainst : drawbridgeBlacklist) {
+            if (itemCheckAgainst == item) return true;
         }
         return false;
     }
 
     /**
      * Adds a itemBlock to the drawbridge black list.
+     * 
      * @param item ItemBlock to be blacklisted.
      */
-    public static void addItemToDBBlackList (ItemBlock item)
-    {
-        if (item == null)
-            throw new NullPointerException("item can't be null");
+    public static void addItemToDBBlackList(ItemBlock item) {
+        if (item == null) throw new NullPointerException("item can't be null");
         drawbridgeBlacklist.add(item);
     }
-    
+
     /**
      * Adds a block to the drawbridge black list.
+     * 
      * @param block Block to be blacklisted.
      */
-    public static void addItemToDBBlackList (Block block)
-    {
-        if (block == null)
-            throw new NullPointerException("block can't be null");
-        
+    public static void addItemToDBBlackList(Block block) {
+        if (block == null) throw new NullPointerException("block can't be null");
+
         Item item = Item.getItemFromBlock(block);
-        if (!(item instanceof ItemBlock))
-            throw new RuntimeException("Block's Item isn't of type ItemBlock");
-        
-        drawbridgeBlacklist.add((ItemBlock)item);
+        if (!(item instanceof ItemBlock)) throw new RuntimeException("Block's Item isn't of type ItemBlock");
+
+        drawbridgeBlacklist.add((ItemBlock) item);
     }
 
-    static
-    {
+    static {
         initializeDrawbridgeState();
     }
 

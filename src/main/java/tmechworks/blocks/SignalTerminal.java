@@ -22,6 +22,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import tmechworks.TMechworks;
 import tmechworks.blocks.logic.SignalTerminalLogic;
 import tmechworks.client.block.SignalTerminalRender;
@@ -29,11 +30,10 @@ import tmechworks.lib.TMechworksRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SignalTerminal extends Block implements ITileEntityProvider
-{
+public class SignalTerminal extends Block implements ITileEntityProvider {
 
-    public static class TerminalGeometry
-    {
+    public static class TerminalGeometry {
+
         public static float plate_width_min = 0.25F;
         public static float plate_width_max = 0.75F;
         public static float plate_low_max = 0.15F;
@@ -56,11 +56,10 @@ public class SignalTerminal extends Block implements ITileEntityProvider
     public IIcon[] icons;
     public IIcon[] channelIcons;
     public String[] textureNames = new String[] { "signalbus" };
-    public String[] channelTextureNames = new String[] { "white", "orange", "magenta", "lightblue", "yellow", "lime", "pink", "gray", "lightgray", "cyan", "purple", "blue", "brown", "green", "red",
-            "black" };
+    public String[] channelTextureNames = new String[] { "white", "orange", "magenta", "lightblue", "yellow", "lime",
+            "pink", "gray", "lightgray", "cyan", "purple", "blue", "brown", "green", "red", "black" };
 
-    public SignalTerminal()
-    {
+    public SignalTerminal() {
         super(Material.circuits);
         this.setHardness(0.1F);
         this.setResistance(1);
@@ -70,15 +69,12 @@ public class SignalTerminal extends Block implements ITileEntityProvider
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon (int side, int metadata)
-    {
+    public IIcon getIcon(int side, int metadata) {
         return icons[0];
     }
 
-    public IIcon getChannelIcon (int channel)
-    {
-        if (channel < 0 || channel >= channelIcons.length)
-        {
+    public IIcon getChannelIcon(int channel) {
+        if (channel < 0 || channel >= channelIcons.length) {
             return channelIcons[0];
         }
 
@@ -87,19 +83,16 @@ public class SignalTerminal extends Block implements ITileEntityProvider
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons (IIconRegister iconRegister)
-    {
+    public void registerBlockIcons(IIconRegister iconRegister) {
         this.icons = new IIcon[textureNames.length];
 
-        for (int i = 0; i < this.icons.length; ++i)
-        {
+        for (int i = 0; i < this.icons.length; ++i) {
             this.icons[i] = iconRegister.registerIcon("tmechworks:" + textureNames[i]);
         }
 
         this.channelIcons = new IIcon[channelTextureNames.length];
 
-        for (int i = 0; i < this.channelIcons.length; ++i)
-        {
+        for (int i = 0; i < this.channelIcons.length; ++i) {
             this.channelIcons[i] = iconRegister.registerIcon("tmechworks:glass/stainedglass_" + channelTextureNames[i]);
         }
     }
@@ -108,36 +101,30 @@ public class SignalTerminal extends Block implements ITileEntityProvider
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool (World par1World, int par2, int par3, int par4)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube ()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock ()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     @Override
-    public boolean isSideSolid (IBlockAccess world, int x, int y, int z, ForgeDirection side)
-    {
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te != null && te instanceof SignalTerminalLogic)
-        {
-            if (((SignalTerminalLogic) te).getConnectedSides()[side.ordinal()] != -1)
-            {
+        if (te != null && te instanceof SignalTerminalLogic) {
+            if (((SignalTerminalLogic) te).getConnectedSides()[side.ordinal()] != -1) {
                 return true;
             }
         }
@@ -148,33 +135,33 @@ public class SignalTerminal extends Block implements ITileEntityProvider
      * The type of render function that is called for this block
      */
     @Override
-    public int getRenderType ()
-    {
+    public int getRenderType() {
         return SignalTerminalRender.renderID;
     }
 
     /**
      * How many world ticks before ticking
      */
-    public int tickRate (World par1World)
-    {
+    public int tickRate(World par1World) {
         return 1;
     }
 
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    public boolean canPlaceBlockAt (World world, int x, int y, int z)
-    {
-        return world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) || world.isSideSolid(x + 1, y, z, ForgeDirection.WEST) || world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
-                || world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) || world.isSideSolid(x, y - 1, z, ForgeDirection.UP) || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN);
+    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+        return world.isSideSolid(x - 1, y, z, ForgeDirection.EAST)
+                || world.isSideSolid(x + 1, y, z, ForgeDirection.WEST)
+                || world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
+                || world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH)
+                || world.isSideSolid(x, y - 1, z, ForgeDirection.UP)
+                || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN);
     }
 
     /**
-    * Updates the blocks bounds based on its current state. Args: world, x, y, z
-    */
-    public void setBlockBoundsBasedOnState (IBlockAccess world, int x, int y, int z)
-    {
+     * Updates the blocks bounds based on its current state. Args: world, x, y, z
+     */
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         float minX = 1;
         float minY = 1;
         float minZ = 1;
@@ -183,12 +170,9 @@ public class SignalTerminal extends Block implements ITileEntityProvider
         float maxZ = 0;
 
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
-            for (AxisAlignedBB aabb : getBoxes((SignalTerminalLogic) te))
-            {
-                if (aabb == null)
-                {
+        if (te instanceof SignalTerminalLogic) {
+            for (AxisAlignedBB aabb : getBoxes((SignalTerminalLogic) te)) {
+                if (aabb == null) {
                     continue;
                 }
 
@@ -201,31 +185,29 @@ public class SignalTerminal extends Block implements ITileEntityProvider
             }
 
             setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-        }
-        else
-        {
+        } else {
             this.setBlockBounds(0.375F, 0.375F, 0.375F, 0.625F, 0.625F, 0.625F);
         }
         return;
     }
 
     @Override
-    public boolean canBlockStay (World world, int x, int y, int z)
-    {
-        return world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) || world.isSideSolid(x + 1, y, z, ForgeDirection.WEST) || world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
-                || world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) || world.isSideSolid(x, y - 1, z, ForgeDirection.UP) || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN);
+    public boolean canBlockStay(World world, int x, int y, int z) {
+        return world.isSideSolid(x - 1, y, z, ForgeDirection.EAST)
+                || world.isSideSolid(x + 1, y, z, ForgeDirection.WEST)
+                || world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
+                || world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH)
+                || world.isSideSolid(x, y - 1, z, ForgeDirection.UP)
+                || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN);
     }
 
     @Override
-    public void addCollisionBoxesToList (World world, int x, int y, int z, AxisAlignedBB collisionTest, List collisionBoxList, Entity entity)
-    {
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB collisionTest,
+            List collisionBoxList, Entity entity) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
-            for (AxisAlignedBB aabb : getBoxes((SignalTerminalLogic) te))
-            {
-                if (aabb == null)
-                {
+        if (te instanceof SignalTerminalLogic) {
+            for (AxisAlignedBB aabb : getBoxes((SignalTerminalLogic) te)) {
+                if (aabb == null) {
                     continue;
                 }
 
@@ -237,14 +219,11 @@ public class SignalTerminal extends Block implements ITileEntityProvider
                 aabb.maxY += y;
                 aabb.maxZ += z;
 
-                if (collisionTest.intersectsWith(aabb))
-                {
+                if (collisionTest.intersectsWith(aabb)) {
                     collisionBoxList.add(aabb);
                 }
             }
-        }
-        else
-        {
+        } else {
             super.addCollisionBoxesToList(world, x, y, z, collisionTest, collisionBoxList, entity);
         }
     }
@@ -254,11 +233,9 @@ public class SignalTerminal extends Block implements ITileEntityProvider
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    public int isProvidingWeakPower (IBlockAccess world, int x, int y, int z, int localSide)
-    {
+    public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int localSide) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
+        if (te instanceof SignalTerminalLogic) {
             return ((SignalTerminalLogic) te).isProvidingWeakPower(localSide);
         }
 
@@ -267,8 +244,7 @@ public class SignalTerminal extends Block implements ITileEntityProvider
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered (IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
         return true;
     }
 
@@ -276,11 +252,9 @@ public class SignalTerminal extends Block implements ITileEntityProvider
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    public int isProvidingStrongPower (IBlockAccess world, int x, int y, int z, int localSide)
-    {
+    public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int localSide) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
+        if (te instanceof SignalTerminalLogic) {
             return ((SignalTerminalLogic) te).isProvidingStrongPower(localSide);
         }
 
@@ -290,116 +264,171 @@ public class SignalTerminal extends Block implements ITileEntityProvider
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    public boolean canProvidePower ()
-    {
+    public boolean canProvidePower() {
         return true;
     }
 
     @Override
-    public TileEntity createNewTileEntity (World world, int meta)
-    {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new SignalTerminalLogic();
     }
 
     @Override
-    public void onNeighborBlockChange (World world, int x, int y, int z, Block neighborID)
-    {
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborID) {
         super.onNeighborBlockChange(world, x, y, z, neighborID);
 
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
+        if (te instanceof SignalTerminalLogic) {
             ((SignalTerminalLogic) te).onNeighborBlockChange();
 
         }
 
     }
 
-    private static AxisAlignedBB[] getBoxes (SignalTerminalLogic logic)
-    {
+    private static AxisAlignedBB[] getBoxes(SignalTerminalLogic logic) {
         byte connected[] = logic.getConnectedSides();
 
         AxisAlignedBB[] parts = new AxisAlignedBB[HITBOXES];
 
         // Center
-        parts[0] = AxisAlignedBB.getBoundingBox(TerminalGeometry.center_min, TerminalGeometry.center_min, TerminalGeometry.center_min, TerminalGeometry.center_max, TerminalGeometry.center_max,
+        parts[0] = AxisAlignedBB.getBoundingBox(
+                TerminalGeometry.center_min,
+                TerminalGeometry.center_min,
+                TerminalGeometry.center_min,
+                TerminalGeometry.center_max,
+                TerminalGeometry.center_max,
                 TerminalGeometry.center_max);
 
-        if (connected[ForgeDirection.DOWN.ordinal()] != -1)
-        {
-            parts[1] = AxisAlignedBB.getBoundingBox(TerminalGeometry.plate_width_min, TerminalGeometry.plate_low_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_width_max,
-                    TerminalGeometry.plate_low_max, TerminalGeometry.plate_width_max);
-            parts[2] = AxisAlignedBB.getBoundingBox(TerminalGeometry.channel_width_min, TerminalGeometry.channel_low_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_width_max,
-                    TerminalGeometry.channel_low_max, TerminalGeometry.channel_width_max);
+        if (connected[ForgeDirection.DOWN.ordinal()] != -1) {
+            parts[1] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_low_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_low_max,
+                    TerminalGeometry.plate_width_max);
+            parts[2] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_low_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_low_max,
+                    TerminalGeometry.channel_width_max);
         }
 
-        if (connected[ForgeDirection.UP.ordinal()] != -1)
-        {
-            parts[3] = AxisAlignedBB.getBoundingBox(TerminalGeometry.plate_width_min, TerminalGeometry.plate_high_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_width_max,
-                    TerminalGeometry.plate_high_max, TerminalGeometry.plate_width_max);
-            parts[4] = AxisAlignedBB.getBoundingBox(TerminalGeometry.channel_width_min, TerminalGeometry.channel_high_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_width_max,
-                    TerminalGeometry.channel_high_max, TerminalGeometry.channel_width_max);
+        if (connected[ForgeDirection.UP.ordinal()] != -1) {
+            parts[3] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_high_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_high_max,
+                    TerminalGeometry.plate_width_max);
+            parts[4] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_high_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_high_max,
+                    TerminalGeometry.channel_width_max);
         }
 
-        if (connected[ForgeDirection.NORTH.ordinal()] != -1)
-        {
-            parts[5] = AxisAlignedBB.getBoundingBox(TerminalGeometry.plate_width_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_high_min, TerminalGeometry.plate_width_max,
-                    TerminalGeometry.plate_width_max, TerminalGeometry.plate_high_max);
-            parts[6] = AxisAlignedBB.getBoundingBox(TerminalGeometry.channel_width_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_high_min, TerminalGeometry.channel_width_max,
-                    TerminalGeometry.channel_width_max, TerminalGeometry.channel_high_max);
+        if (connected[ForgeDirection.NORTH.ordinal()] != -1) {
+            parts[5] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_high_min,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_high_max);
+            parts[6] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_high_min,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_high_max);
         }
 
-        if (connected[ForgeDirection.SOUTH.ordinal()] != -1)
-        {
-            parts[7] = AxisAlignedBB.getBoundingBox(TerminalGeometry.plate_width_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_low_min, TerminalGeometry.plate_width_max,
-                    TerminalGeometry.plate_width_max, TerminalGeometry.plate_low_max);
-            parts[8] = AxisAlignedBB.getBoundingBox(TerminalGeometry.channel_width_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_low_min, TerminalGeometry.channel_width_max,
-                    TerminalGeometry.channel_width_max, TerminalGeometry.channel_low_max);
+        if (connected[ForgeDirection.SOUTH.ordinal()] != -1) {
+            parts[7] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_low_min,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_low_max);
+            parts[8] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_low_min,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_low_max);
         }
 
-        if (connected[ForgeDirection.WEST.ordinal()] != -1)
-        {
-            parts[9] = AxisAlignedBB.getBoundingBox(TerminalGeometry.plate_low_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_low_max,
-                    TerminalGeometry.plate_width_max, TerminalGeometry.plate_width_max);
-            parts[10] = AxisAlignedBB.getBoundingBox(TerminalGeometry.channel_low_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_low_max,
-                    TerminalGeometry.channel_width_max, TerminalGeometry.channel_width_max);
+        if (connected[ForgeDirection.WEST.ordinal()] != -1) {
+            parts[9] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.plate_low_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_low_max,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_width_max);
+            parts[10] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.channel_low_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_low_max,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_width_max);
         }
 
-        if (connected[ForgeDirection.EAST.ordinal()] != -1)
-        {
-            parts[11] = AxisAlignedBB.getBoundingBox(TerminalGeometry.plate_high_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_width_min, TerminalGeometry.plate_high_max,
-                    TerminalGeometry.plate_width_max, TerminalGeometry.plate_width_max);
-            parts[12] = AxisAlignedBB.getBoundingBox(TerminalGeometry.channel_high_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_width_min, TerminalGeometry.channel_high_max,
-                    TerminalGeometry.channel_width_max, TerminalGeometry.channel_width_max);
+        if (connected[ForgeDirection.EAST.ordinal()] != -1) {
+            parts[11] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.plate_high_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_width_min,
+                    TerminalGeometry.plate_high_max,
+                    TerminalGeometry.plate_width_max,
+                    TerminalGeometry.plate_width_max);
+            parts[12] = AxisAlignedBB.getBoundingBox(
+                    TerminalGeometry.channel_high_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_width_min,
+                    TerminalGeometry.channel_high_max,
+                    TerminalGeometry.channel_width_max,
+                    TerminalGeometry.channel_width_max);
         }
 
         return parts;
     }
 
-    private static int closestClicked (EntityPlayer player, double reachDistance, SignalTerminalLogic terminal, AxisAlignedBB[] parts)
-    {
+    private static int closestClicked(EntityPlayer player, double reachDistance, SignalTerminalLogic terminal,
+            AxisAlignedBB[] parts) {
         int closest = -1;
 
-        Vec3 playerPosition = Vec3.createVectorHelper(player.posX - terminal.xCoord, player.posY - terminal.yCoord + player.getEyeHeight(), player.posZ - terminal.zCoord);
+        Vec3 playerPosition = Vec3.createVectorHelper(
+                player.posX - terminal.xCoord,
+                player.posY - terminal.yCoord + player.getEyeHeight(),
+                player.posZ - terminal.zCoord);
         Vec3 playerLook = player.getLookVec();
 
-        Vec3 playerViewOffset = Vec3.createVectorHelper(playerPosition.xCoord + playerLook.xCoord * reachDistance, playerPosition.yCoord + playerLook.yCoord * reachDistance, playerPosition.zCoord
-                + playerLook.zCoord * reachDistance);
+        Vec3 playerViewOffset = Vec3.createVectorHelper(
+                playerPosition.xCoord + playerLook.xCoord * reachDistance,
+                playerPosition.yCoord + playerLook.yCoord * reachDistance,
+                playerPosition.zCoord + playerLook.zCoord * reachDistance);
         double closestCalc = Double.MAX_VALUE;
         double hitDistance = 0D;
 
-        for (int i = 0; i < parts.length; i++)
-        {
-            if (parts[i] == null)
-            {
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i] == null) {
                 continue;
             }
             MovingObjectPosition hit = parts[i].calculateIntercept(playerPosition, playerViewOffset);
-            if (hit != null)
-            {
+            if (hit != null) {
                 hitDistance = playerPosition.distanceTo(hit.hitVec);
-                if (hitDistance < closestCalc)
-                {
+                if (hitDistance < closestCalc) {
                     closestCalc = hitDistance;
                     closest = i;
                 }
@@ -409,40 +438,35 @@ public class SignalTerminal extends Block implements ITileEntityProvider
     }
 
     @Override
-    public boolean onBlockActivated (World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer,
+            int par6, float par7, float par8, float par9) {
         TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
-        if (!par1World.isRemote)
-        {
-            if (te != null && te instanceof SignalTerminalLogic)
-            {
-                if (!par1World.isRemote)
-                {
+        if (!par1World.isRemote) {
+            if (te != null && te instanceof SignalTerminalLogic) {
+                if (!par1World.isRemote) {
                     par1World.markBlockForUpdate(par2, par3, par4);
                 }
-                int boxHit = closestClicked(par5EntityPlayer, 3.0F, (SignalTerminalLogic) te, getBoxes((SignalTerminalLogic) te));
-                if (boxHit < 0 || boxHit >= HITBOXES)
-                {
+                int boxHit = closestClicked(
+                        par5EntityPlayer,
+                        3.0F,
+                        (SignalTerminalLogic) te,
+                        getBoxes((SignalTerminalLogic) te));
+                if (boxHit < 0 || boxHit >= HITBOXES) {
                     return false;
                 }
-                if (boxHit == 0)
-                {
+                if (boxHit == 0) {
                     return false;
                 }
                 int side = sideBoxMapping[boxHit];
 
-                if (side < 0 || side >= 6)
-                {
+                if (side < 0 || side >= 6) {
                     return false;
                 }
 
-                if (par5EntityPlayer.isSneaking())
-                {
+                if (par5EntityPlayer.isSneaking()) {
                     ((SignalTerminalLogic) te).prevChannel(side);
-                }
-                else
-                {
+                } else {
                     ((SignalTerminalLogic) te).nextChannel(side);
                 }
             }
@@ -452,14 +476,11 @@ public class SignalTerminal extends Block implements ITileEntityProvider
     }
 
     @Override
-    public void onBlockPlacedBy (World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
-    {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
+        if (te instanceof SignalTerminalLogic) {
             NBTTagCompound data = itemStack.stackTagCompound;
-            if (data != null && data.hasKey("connectedSide"))
-            {
+            if (data != null && data.hasKey("connectedSide")) {
                 ((SignalTerminalLogic) te).addPendingSide(data.getInteger("connectedSide"));
                 itemStack.stackTagCompound = null;
             }
@@ -468,33 +489,34 @@ public class SignalTerminal extends Block implements ITileEntityProvider
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops (World world, int x, int y, int z, int metadata, int fortune)
-    {
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         return new ArrayList<ItemStack>();
     }
 
     @Override
-    public void breakBlock (World world, int x, int y, int z, Block id, int meta)
-    {
+    public void breakBlock(World world, int x, int y, int z, Block id, int meta) {
         int dropTerm, dropWire = 0;
         float jumpX, jumpY, jumpZ;
         ItemStack tempStack;
         Random rand = new Random();
 
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof SignalTerminalLogic)
-        {
+        if (te instanceof SignalTerminalLogic) {
             dropTerm = ((SignalTerminalLogic) te).getDroppedTerminals();
             dropWire = ((SignalTerminalLogic) te).getDroppedWire();
 
-            if (dropTerm > 0)
-            {
+            if (dropTerm > 0) {
                 tempStack = new ItemStack(TMechworks.content.signalTerminal, dropTerm, 0);
                 jumpX = rand.nextFloat() * 0.8F + 0.1F;
                 jumpY = rand.nextFloat() * 0.8F + 0.1F;
                 jumpZ = rand.nextFloat() * 0.8F + 0.1F;
 
-                EntityItem entityitem = new EntityItem(world, (double) ((float) x + jumpX), (double) ((float) y + jumpY), (double) ((float) z + jumpZ), tempStack);
+                EntityItem entityitem = new EntityItem(
+                        world,
+                        (double) ((float) x + jumpX),
+                        (double) ((float) y + jumpY),
+                        (double) ((float) z + jumpZ),
+                        tempStack);
 
                 float offset = 0.05F;
                 entityitem.motionX = (double) ((float) rand.nextGaussian() * offset);
@@ -502,14 +524,18 @@ public class SignalTerminal extends Block implements ITileEntityProvider
                 entityitem.motionZ = (double) ((float) rand.nextGaussian() * offset);
                 world.spawnEntityInWorld(entityitem);
             }
-            if (dropWire > 0)
-            {
+            if (dropWire > 0) {
                 tempStack = new ItemStack(TMechworks.content.lengthWire, dropWire);
                 jumpX = rand.nextFloat() * 0.8F + 0.1F;
                 jumpY = rand.nextFloat() * 0.8F + 0.1F;
                 jumpZ = rand.nextFloat() * 0.8F + 0.1F;
 
-                EntityItem entityitem = new EntityItem(world, (double) ((float) x + jumpX), (double) ((float) y + jumpY), (double) ((float) z + jumpZ), tempStack);
+                EntityItem entityitem = new EntityItem(
+                        world,
+                        (double) ((float) x + jumpX),
+                        (double) ((float) y + jumpY),
+                        (double) ((float) z + jumpZ),
+                        tempStack);
 
                 float offset = 0.05F;
                 entityitem.motionX = (double) ((float) rand.nextGaussian() * offset);

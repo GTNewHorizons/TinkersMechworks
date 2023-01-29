@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 
 import mantle.world.CoordTuple;
 import mantle.world.CoordTuplePair;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -17,19 +18,15 @@ import tmechworks.TMechworks;
 import tmechworks.lib.signal.ISignalTransceiver;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class SignalTetherWorldOverlayRenderer
-{
+public class SignalTetherWorldOverlayRenderer {
 
     @SubscribeEvent
-    public void onWorldRenderLast (RenderWorldLastEvent event)
-    {
+    public void onWorldRenderLast(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (mc.thePlayer == null || mc.thePlayer.getHeldItem() == null)
-        {
+        if (mc.thePlayer == null || mc.thePlayer.getHeldItem() == null) {
             return;
         }
-        if (mc.thePlayer.getHeldItem().getItem() == TMechworks.instance.content.spoolWire)
-        {
+        if (mc.thePlayer.getHeldItem().getItem() == TMechworks.instance.content.spoolWire) {
             GL11.glPushMatrix();
             Entity entity = mc.renderViewEntity;
 
@@ -69,16 +66,15 @@ public class SignalTetherWorldOverlayRenderer
             ArrayDeque<CoordTuplePair> transceivers = new ArrayDeque<CoordTuplePair>();
             CoordTuple src;
             CoordTuple dst;
-            for (int c = 0; c < 9; ++c)
-            {
-                for (Object obj : chunks[c].chunkTileEntityMap.values())
-                {
-                    if (obj instanceof ISignalTransceiver && obj instanceof TileEntity)
-                    {
+            for (int c = 0; c < 9; ++c) {
+                for (Object obj : chunks[c].chunkTileEntityMap.values()) {
+                    if (obj instanceof ISignalTransceiver && obj instanceof TileEntity) {
                         dst = ((ISignalTransceiver) obj).getBusCoords();
-                        if (dst != null)
-                        {
-                            src = new CoordTuple(((TileEntity) obj).xCoord, ((TileEntity) obj).yCoord, ((TileEntity) obj).zCoord);
+                        if (dst != null) {
+                            src = new CoordTuple(
+                                    ((TileEntity) obj).xCoord,
+                                    ((TileEntity) obj).yCoord,
+                                    ((TileEntity) obj).zCoord);
                             transceivers.push(new CoordTuplePair(src, dst));
                         }
                     }
@@ -90,8 +86,7 @@ public class SignalTetherWorldOverlayRenderer
             GL11.glColor4f(1, 0, 0, 1);
 
             CoordTuplePair renderPair;
-            while (transceivers.size() > 0)
-            {
+            while (transceivers.size() > 0) {
                 renderPair = transceivers.pop();
 
                 GL11.glVertex3d(renderPair.a.x + 0.5, renderPair.a.y + 0.5, renderPair.a.z + 0.5);

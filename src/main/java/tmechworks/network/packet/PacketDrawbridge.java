@@ -1,27 +1,26 @@
 package tmechworks.network.packet;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import mantle.common.network.AbstractPacket;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import tmechworks.blocks.logic.AdvancedDrawbridgeLogic;
 import tmechworks.blocks.logic.DrawbridgeLogic;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
 
-public class PacketDrawbridge extends AbstractPacket
-{
+public class PacketDrawbridge extends AbstractPacket {
 
     public int x, y, z;
     public byte direction;
 
-    public PacketDrawbridge()
-    {
+    public PacketDrawbridge() {
 
     }
 
-    public PacketDrawbridge(int x, int y, int z, byte direction)
-    {
+    public PacketDrawbridge(int x, int y, int z, byte direction) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -29,8 +28,7 @@ public class PacketDrawbridge extends AbstractPacket
     }
 
     @Override
-    public void encodeInto (ChannelHandlerContext ctx, ByteBuf buffer)
-    {
+    public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
         buffer.writeInt(x);
         buffer.writeInt(y);
         buffer.writeInt(z);
@@ -38,8 +36,7 @@ public class PacketDrawbridge extends AbstractPacket
     }
 
     @Override
-    public void decodeInto (ChannelHandlerContext ctx, ByteBuf buffer)
-    {
+    public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
         x = buffer.readInt();
         y = buffer.readInt();
         z = buffer.readInt();
@@ -47,24 +44,19 @@ public class PacketDrawbridge extends AbstractPacket
     }
 
     @Override
-    public void handleClientSide (EntityPlayer player)
-    {
+    public void handleClientSide(EntityPlayer player) {
 
     }
 
     @Override
-    public void handleServerSide (EntityPlayer player)
-    {
+    public void handleServerSide(EntityPlayer player) {
         World world = player.worldObj;
         TileEntity te = world.getTileEntity(x, y, z);
 
-        if (te instanceof DrawbridgeLogic)
-        {
+        if (te instanceof DrawbridgeLogic) {
             ((DrawbridgeLogic) te).setPlacementDirection(direction);
             te.markDirty();
-        }
-        else if (te instanceof AdvancedDrawbridgeLogic)
-        {
+        } else if (te instanceof AdvancedDrawbridgeLogic) {
             ((AdvancedDrawbridgeLogic) te).setPlacementDirection(direction);
         }
     }

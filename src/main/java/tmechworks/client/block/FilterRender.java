@@ -1,6 +1,7 @@
 package tmechworks.client.block;
 
 import mantle.world.CoordTuple;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,76 +13,83 @@ import tmechworks.blocks.FilterBlock;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class FilterRender implements ISimpleBlockRenderingHandler
-{
+public class FilterRender implements ISimpleBlockRenderingHandler {
+
     public static int renderID = RenderingRegistry.getNextAvailableRenderId();
 
-    //Width of the frame pieces.
+    // Width of the frame pieces.
     public static final double sideWidth = FilterBlock.sideWidth;
-    //Thickness of the whole assembly
+    // Thickness of the whole assembly
     public static final double thickness = FilterBlock.thickness;
 
     @Override
-    public void renderInventoryBlock (Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
-        //Long sides.
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+        // Long sides.
         renderer.setRenderBounds(0.0, 0.0D, 0.0, sideWidth, thickness, 1.0D);
         this.renderStandardBlockInv(block, metadata, renderer);
 
         renderer.setRenderBounds(1.0D - sideWidth, 0.0D, 0.0, 1.0D, thickness, 1.0D);
         this.renderStandardBlockInv(block, metadata, renderer);
 
-        //Short sides.
+        // Short sides.
         renderer.setRenderBounds(sideWidth, 0.0D, 0.0, 1.0D - sideWidth, thickness, sideWidth);
         this.renderStandardBlockInv(block, metadata, renderer);
 
         renderer.setRenderBounds(sideWidth, 0.0D, 1.0D - sideWidth, 1.0D - sideWidth, thickness, 1.0D);
         this.renderStandardBlockInv(block, metadata, renderer);
 
-        //Filter mesh
+        // Filter mesh
         FilterBlock fb = (FilterBlock) block;
-        if (fb.getMeshIcon(metadata) != null)
-        {
+        if (fb.getMeshIcon(metadata) != null) {
             renderer.setOverrideBlockTexture(fb.getMeshIcon(metadata));
-            renderer.setRenderBounds(sideWidth, thickness / 2.0D, sideWidth, 1.0D - sideWidth, (thickness / 2.0D) + 0.02F, 1.0D - sideWidth);
+            renderer.setRenderBounds(
+                    sideWidth,
+                    thickness / 2.0D,
+                    sideWidth,
+                    1.0D - sideWidth,
+                    (thickness / 2.0D) + 0.02F,
+                    1.0D - sideWidth);
             this.renderStandardBlockInv(block, metadata, renderer);
             renderer.clearOverrideBlockTexture();
         }
     }
 
     @Override
-    public boolean renderWorldBlock (IBlockAccess world, int x, int y, int z, Block block, int modelID, RenderBlocks renderer)
-    {
-        if (modelID == renderID)
-        {
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelID,
+            RenderBlocks renderer) {
+        if (modelID == renderID) {
             CoordTuple position = new CoordTuple(x, y, z);
             int metadata = world.getBlockMetadata(position.x, position.y, position.z);
             FilterBlock fb = (FilterBlock) block;
             double bottom = 0.0D;
             double top = thickness;
-            if (fb.isTop(world, position))
-            {
+            if (fb.isTop(world, position)) {
                 bottom = 1.0D - thickness;
                 top = 1.0D;
             }
-            //Long sides.
+            // Long sides.
             renderer.setRenderBounds(0.0D, bottom, 0.0, sideWidth, top, 1.0D);
             renderer.renderStandardBlock(block, position.x, position.y, position.z);
 
             renderer.setRenderBounds(1.0D - sideWidth, bottom, 0.0, 1.0D, top, 1.0D);
             renderer.renderStandardBlock(block, position.x, position.y, position.z);
-            //Short sides.
+            // Short sides.
             renderer.setRenderBounds(sideWidth, bottom, 0.0, 1.0D - sideWidth, top, sideWidth);
             renderer.renderStandardBlock(block, position.x, position.y, position.z);
 
             renderer.setRenderBounds(sideWidth, bottom, 1.0D - sideWidth, 1.0D - sideWidth, top, 1.0D);
             renderer.renderStandardBlock(block, position.x, position.y, position.z);
 
-            //Filter mesh
-            if (fb.getMeshIcon(metadata) != null)
-            {
+            // Filter mesh
+            if (fb.getMeshIcon(metadata) != null) {
                 renderer.setOverrideBlockTexture(fb.getMeshIcon(metadata));
-                renderer.setRenderBounds(sideWidth, bottom + (thickness / 6.0D), sideWidth, 1.0D - sideWidth, top - (thickness / 6.0D), 1.0D - sideWidth);
+                renderer.setRenderBounds(
+                        sideWidth,
+                        bottom + (thickness / 6.0D),
+                        sideWidth,
+                        1.0D - sideWidth,
+                        top - (thickness / 6.0D),
+                        1.0D - sideWidth);
                 renderer.renderStandardBlock(block, position.x, position.y, position.z);
                 renderer.clearOverrideBlockTexture();
             }
@@ -91,13 +99,11 @@ public class FilterRender implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public int getRenderId ()
-    {
+    public int getRenderId() {
         return renderID;
     }
 
-    private void renderStandardBlockInv (Block block, int meta, RenderBlocks renderer)
-    {
+    private void renderStandardBlockInv(Block block, int meta, RenderBlocks renderer) {
         Tessellator tessellator = Tessellator.instance;
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         tessellator.startDrawingQuads();
@@ -128,8 +134,7 @@ public class FilterRender implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public boolean shouldRender3DInInventory (int modelId)
-    {
+    public boolean shouldRender3DInInventory(int modelId) {
         return true;
     }
 }

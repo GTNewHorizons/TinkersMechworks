@@ -6,19 +6,14 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-//Lets XP orbs through, and items that are not itemBlocks.
-public class SlatFilter extends SubFilter
-{
+// Lets XP orbs through, and items that are not itemBlocks.
+public class SlatFilter extends SubFilter {
 
     @Override
-    public boolean canPass (Entity entity)
-    {
-        if (entity instanceof EntityXPOrb)
-        {
+    public boolean canPass(Entity entity) {
+        if (entity instanceof EntityXPOrb) {
             return true;
-        }
-        else if (entity instanceof EntityItem)
-        {
+        } else if (entity instanceof EntityItem) {
             EntityItem check = (EntityItem) entity;
             return canPass(check.getEntityItem());
         }
@@ -26,10 +21,8 @@ public class SlatFilter extends SubFilter
     }
 
     @Override
-    public boolean canPass (ItemStack itemStack)
-    {
-        if (itemStack.getItem() instanceof ItemBlock)
-        {
+    public boolean canPass(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof ItemBlock) {
             return false;
         }
         return true;

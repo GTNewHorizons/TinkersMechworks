@@ -14,15 +14,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DynamoSpecialRender extends TileEntitySpecialRenderer
-{
+public class DynamoSpecialRender extends TileEntitySpecialRenderer {
+
     private static final ResourceLocation texture = new ResourceLocation("tmechworks", "textures/entity/dynamo.png");
 
     /** The ModelSign instance used by the TileEntitySignRenderer */
     private final DynamoModel model = new DynamoModel();
 
-    public void renderModel (DynamoLogic par1TileEntitySign, double x, double y, double z, float notDeltaTime)
-    {
+    public void renderModel(DynamoLogic par1TileEntitySign, double x, double y, double z, float notDeltaTime) {
         Block block = par1TileEntitySign.getBlockType();
         GL11.glPushMatrix();
         float f1 = 1F;
@@ -51,8 +50,7 @@ public class DynamoSpecialRender extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt (TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
-    {
+    public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8) {
         this.renderModel((DynamoLogic) par1TileEntity, par2, par4, par6, par8);
     }
 }
