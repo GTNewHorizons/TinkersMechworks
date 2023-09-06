@@ -1,0 +1,35 @@
+itemGroup.TMechworks=TMechworks
+
+tile.signalbus.name=Сигнальна шина
+tile.signalterminal.name=Сигнальний термінал
+tile.tmechworks.dynamo.name=Двигун
+tile.tmechworks.meshFilter.empty.name=Порожня фільтрувальна сітка
+tile.tmechworks.meshFilter.wide.name=Широка фільтрувальна сітка
+tile.tmechworks.meshFilter.slat.name=Прямокутна фільтрувальна сітка
+tile.tmechworks.meshFilter.mesh.name=фільтрувальна сітка
+tile.tmechworks.meshFilter.fine.name=Тонка фільтрувальна сітка
+
+item.spoolwire.name=Моток дроту
+item.lengthwire.name=Дріт
+
+block.drawbridge.name=Розвідний міст
+block.firestarter.name=Запалювач
+block.advdrawbridge.name=Просунутий розвідний міст
+block.extdrawbridge.name=Подовжений розвідний міст
+
+tooltip.spoolofwire=Дротово!
+tooltip.spoolofwire.connecting=Підключення (X:%d, Y:%d, Z:%d, Dim:%d)
+tooltip.drawbridge.inventory=Інвентар: 
+tooltip.drawbridge.amount=Кількість: 
+tooltip.drawbridge.slot=Слот 
+tooltip.drawbridge.camoflauge=Камуфляж: 
+tooltip.drawbridge.direction=Напрямок розміщення: 
+tooltip.drawbridge.default=Зберігає свій інвентар, коли збирає
+tooltip.drawbridge.direction.up=Вгору
+tooltip.drawbridge.direction.down=Вниз
+tooltip.drawbridge.direction.left=Вліво
+tooltip.drawbridge.direction.right=Вправо
+
+container.advdrawbridge=Просунутий розвідний міст
+container.inv=Inv
+container.drawbridge=Розвідний міст
