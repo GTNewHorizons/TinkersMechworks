@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import mantle.world.CoordTuple;
 import tmechworks.TMechworks;
 import tmechworks.blocks.component.SignalBusMasterLogic;
 import tmechworks.lib.multiblock.IMultiblockMember;

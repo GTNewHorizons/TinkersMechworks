@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
+
+import mantle.world.CoordTuple;
 
 public abstract class MultiblockBaseLogic extends TileEntity implements IMultiblockMember {
 

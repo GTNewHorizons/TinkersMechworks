@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import mantle.blocks.BlockUtils;
-import mantle.blocks.abstracts.InventoryLogic;
-import mantle.blocks.iface.IActiveLogic;
-import mantle.blocks.iface.IFacingLogic;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,12 +27,16 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.mojang.authlib.GameProfile;
+
+import mantle.blocks.BlockUtils;
+import mantle.blocks.abstracts.InventoryLogic;
+import mantle.blocks.iface.IActiveLogic;
+import mantle.blocks.iface.IFacingLogic;
 import tmechworks.inventory.DrawbridgeContainer;
 import tmechworks.lib.TMechworksRegistry;
 import tmechworks.lib.blocks.IDrawbridgeLogicBase;
 import tmechworks.lib.player.FakePlayerLogic;
-
-import com.mojang.authlib.GameProfile;
 
 public class DrawbridgeLogic extends InventoryLogic implements IFacingLogic, IActiveLogic, IDrawbridgeLogicBase {
 

@@ -1,7 +1,5 @@
 package tmechworks.client.block;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -9,9 +7,10 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import tmechworks.blocks.FilterBlock;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import mantle.world.CoordTuple;
+import tmechworks.blocks.FilterBlock;
 
 public class FilterRender implements ISimpleBlockRenderingHandler {
 

@@ -2,8 +2,6 @@ package tmechworks.blocks;
 
 import java.util.List;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,12 +20,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mantle.world.CoordTuple;
 import tmechworks.blocks.logic.SubFilter;
 import tmechworks.client.block.FilterRender;
 import tmechworks.lib.TMechworksRegistry;
 import tmechworks.lib.blocks.IBlockWithMetadata;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FilterBlock extends Block implements IBlockWithMetadata {
 

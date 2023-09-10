@@ -14,13 +14,13 @@ import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.HashBiMap;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import tconstruct.world.TinkerWorld;
 import tmechworks.TMechworks;
 import tmechworks.lib.blocks.PlacementType;
 import tmechworks.lib.util.TabTools;
-
-import com.google.common.collect.HashBiMap;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TMechworksRegistry {
 

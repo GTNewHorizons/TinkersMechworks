@@ -2,8 +2,6 @@ package tmechworks.blocks.logic;
 
 import java.util.Arrays;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import mantle.world.CoordTuple;
 import tmechworks.TMechworks;
 import tmechworks.blocks.SignalTerminal;
 import tmechworks.common.MechContent;

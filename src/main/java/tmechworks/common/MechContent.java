@@ -1,7 +1,5 @@
 package tmechworks.common;
 
-import mantle.lib.client.MantleClientRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -11,6 +9,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import mantle.lib.client.MantleClientRegistry;
 import tconstruct.library.TConstructRegistry;
 import tmechworks.blocks.DynamoBlock;
 import tmechworks.blocks.FilterBlock;
@@ -34,7 +34,6 @@ import tmechworks.items.blocks.RedstoneMachineItem;
 import tmechworks.items.blocks.SignalBusItem;
 import tmechworks.items.blocks.SignalTerminalItem;
 import tmechworks.lib.TMechworksRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MechContent {
 

@@ -25,9 +25,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import tmechworks.blocks.logic.SignalTerminalLogic;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import tmechworks.blocks.logic.SignalTerminalLogic;
 
 public class SignalTerminalRender implements ISimpleBlockRenderingHandler {
 

@@ -1,9 +1,5 @@
 package tmechworks.blocks.logic;
 
-import mantle.blocks.iface.IActiveLogic;
-import mantle.blocks.iface.IFacingLogic;
-import mantle.world.WorldHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -15,6 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import mantle.blocks.iface.IActiveLogic;
+import mantle.blocks.iface.IFacingLogic;
+import mantle.world.WorldHelper;
 import tconstruct.library.tools.AbilityHelper;
 
 public class FirestarterLogic extends TileEntity implements IFacingLogic, IActiveLogic {

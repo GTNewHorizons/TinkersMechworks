@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import mantle.world.WorldHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -33,13 +31,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mantle.world.WorldHelper;
 import tmechworks.TMechworks;
 import tmechworks.blocks.logic.SignalBusLogic;
 import tmechworks.client.block.SignalBusRender;
 import tmechworks.lib.TMechworksRegistry;
 import tmechworks.lib.multiblock.IMultiblockMember;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class SignalBus extends Block implements ITileEntityProvider {
 

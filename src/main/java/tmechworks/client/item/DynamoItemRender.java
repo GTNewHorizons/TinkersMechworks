@@ -7,9 +7,9 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import tmechworks.client.model.DynamoModel;
 import tmechworks.common.MechContent;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class DynamoItemRender implements IItemRenderer {
 

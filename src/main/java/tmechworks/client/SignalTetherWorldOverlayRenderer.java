@@ -2,9 +2,6 @@ package tmechworks.client;
 
 import java.util.ArrayDeque;
 
-import mantle.world.CoordTuple;
-import mantle.world.CoordTuplePair;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -14,9 +11,11 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import mantle.world.CoordTuple;
+import mantle.world.CoordTuplePair;
 import tmechworks.TMechworks;
 import tmechworks.lib.signal.ISignalTransceiver;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class SignalTetherWorldOverlayRenderer {
 

@@ -2,8 +2,6 @@ package tmechworks.blocks.logic;
 
 import java.util.List;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -15,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import mantle.world.CoordTuple;
 import tmechworks.blocks.FilterBlock;
 
 /*---------------- DEPRECATED, KEPT FOR REFERENCE ----------------*/
