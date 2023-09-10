@@ -6,8 +6,6 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import mantle.common.network.AbstractPacket;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,6 +24,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
+import mantle.common.network.AbstractPacket;
 
 /**
  * Packet pipeline class. Directs all registered packet data to be handled by the packets themselves.

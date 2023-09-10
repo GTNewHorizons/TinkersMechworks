@@ -10,9 +10,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import tmechworks.blocks.logic.SignalTerminalLogic;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tmechworks.blocks.logic.SignalTerminalLogic;
 
 public class SignalTerminalItem extends ItemBlock {
 

@@ -8,10 +8,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import tmechworks.blocks.SignalBus.BusGeometry;
-import tmechworks.blocks.logic.SignalBusLogic;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import tmechworks.blocks.SignalBus.BusGeometry;
+import tmechworks.blocks.logic.SignalBusLogic;
 
 public class SignalBusRender implements ISimpleBlockRenderingHandler {
 

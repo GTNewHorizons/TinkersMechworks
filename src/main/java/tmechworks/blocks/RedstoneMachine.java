@@ -3,13 +3,6 @@ package tmechworks.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import mantle.blocks.abstracts.InventoryBlock;
-import mantle.blocks.abstracts.InventoryLogic;
-import mantle.blocks.iface.IActiveLogic;
-import mantle.blocks.iface.IFacingLogic;
-import mantle.common.ComparisonHelper;
-import mantle.world.CoordTuple;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -28,6 +21,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mantle.blocks.abstracts.InventoryBlock;
+import mantle.blocks.abstracts.InventoryLogic;
+import mantle.blocks.iface.IActiveLogic;
+import mantle.blocks.iface.IFacingLogic;
+import mantle.common.ComparisonHelper;
+import mantle.world.CoordTuple;
 import tmechworks.TMechworks;
 import tmechworks.blocks.logic.AdvancedDrawbridgeLogic;
 import tmechworks.blocks.logic.DrawbridgeLogic;
@@ -35,8 +36,6 @@ import tmechworks.blocks.logic.FirestarterLogic;
 import tmechworks.client.block.MachineRender;
 import tmechworks.lib.TMechworksRegistry;
 import tmechworks.lib.blocks.IDrawbridgeLogicBase;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class RedstoneMachine extends InventoryBlock {
 

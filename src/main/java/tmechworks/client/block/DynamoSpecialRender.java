@@ -8,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import tmechworks.blocks.logic.DynamoLogic;
-import tmechworks.client.model.DynamoModel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tmechworks.blocks.logic.DynamoLogic;
+import tmechworks.client.model.DynamoModel;
 
 @SideOnly(Side.CLIENT)
 public class DynamoSpecialRender extends TileEntitySpecialRenderer {

@@ -5,6 +5,16 @@ import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Logger;
 
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import tmechworks.client.SignalTetherWorldOverlayRenderer;
 import tmechworks.command.BlockInfoCommand;
 import tmechworks.common.CommonProxy;
@@ -16,16 +26,6 @@ import tmechworks.lib.multiblock.MultiblockEventHandler;
 import tmechworks.lib.multiblock.MultiblockServerTickHandler;
 import tmechworks.lib.util.TabTools;
 import tmechworks.network.packet.PacketPipeline;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Repo.modId, name = Repo.modName, version = Repo.modVer, dependencies = Repo.modDeps)
 public class TMechworks {

@@ -1,8 +1,8 @@
 package tmechworks.lib.signal;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.world.World;
+
+import mantle.world.CoordTuple;
 
 public interface ISignalTransceiver {
 

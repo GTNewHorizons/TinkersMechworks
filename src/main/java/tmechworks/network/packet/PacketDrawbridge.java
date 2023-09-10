@@ -1,15 +1,14 @@
 package tmechworks.network.packet;
 
-import mantle.common.network.AbstractPacket;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import tmechworks.blocks.logic.AdvancedDrawbridgeLogic;
-import tmechworks.blocks.logic.DrawbridgeLogic;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import mantle.common.network.AbstractPacket;
+import tmechworks.blocks.logic.AdvancedDrawbridgeLogic;
+import tmechworks.blocks.logic.DrawbridgeLogic;
 
 public class PacketDrawbridge extends AbstractPacket {
 

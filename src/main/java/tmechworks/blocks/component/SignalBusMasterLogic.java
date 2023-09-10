@@ -4,12 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import mantle.world.CoordTuple;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import mantle.world.CoordTuple;
 import tmechworks.blocks.logic.SignalBusLogic;
 import tmechworks.lib.multiblock.IMultiblockMember;
 import tmechworks.lib.multiblock.MultiblockMasterBaseLogic;

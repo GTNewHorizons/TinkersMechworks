@@ -11,10 +11,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import tmechworks.TMechworks;
-import tmechworks.blocks.logic.SignalBusLogic;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tmechworks.TMechworks;
+import tmechworks.blocks.logic.SignalBusLogic;
 
 public class SignalBusItem extends ItemBlock {
 
